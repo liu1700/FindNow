@@ -65,7 +65,7 @@ export default class HomeScreen extends React.Component {
           <View style={styles.popupContainer}>
             <Button
               raised
-              icon={{name: 'google-play', type: 'entypo', buttonStyle: {color: 'red'}}
+              icon={{name: 'google-play', type: 'entypo', buttonStyle: {color: 'red'}}}
               title='Sign In Via Google' />
             <Divider style={styles.separator} />
             <TextInput
