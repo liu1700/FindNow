@@ -12,10 +12,10 @@ import {
 import MapView from 'react-native-maps';
 
 import { MonoText, TabBarTitleText } from '../components/StyledText';
-import { Divider, Button } from 'react-native-elements';
 import { Toolbar } from 'react-native-material-ui';
 import PopupDialog, { SlideAnimation, DialogTitle } from 'react-native-popup-dialog';
 import Colors from '../constants/Colors';
+import DeviceInfo from 'react-native-device-info';
 
 export default class HomeScreen extends React.Component {
 
@@ -28,7 +28,8 @@ export default class HomeScreen extends React.Component {
 
   componentDidMount() {
     StatusBar.setHidden(true)
-    this._needSignInPopupDialog()
+    console.log(DeviceInfo.getUniqueID())
+    // this._needSignInPopupDialog()
   }
 
   static navigationOptions = {
@@ -63,11 +64,6 @@ export default class HomeScreen extends React.Component {
           ref={(popupDialog) => { this.popupDialog = popupDialog; }}
           dialogAnimation={slideAnimation}>
           <View style={styles.popupContainer}>
-            <Button
-              raised
-              icon={{name: 'google-play', type: 'entypo', buttonStyle: {color: 'red'}}}
-              title='Sign In Via Google' />
-            <Divider style={styles.separator} />
             <TextInput
               style={styles.textInputStyle}
               placeholder="Pick a Nickname"

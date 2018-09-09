@@ -9,6 +9,7 @@
   "dependencies": {
     "react": "16.4.1",
     "react-native": "0.56.0",
+    "react-native-device-info": "^0.22.5",
     "react-native-elements": "^0.19.1",
     "react-native-maps": "^0.21.0",
     "react-native-material-ui": "^1.30.1",
