@@ -7,11 +7,13 @@ import {
   StatusBar,
   SectionList,
   Text,
+  TextInput,
 } from 'react-native';
 import MapView from 'react-native-maps';
 
 import { MonoText, TabBarTitleText } from '../components/StyledText';
-import { Toolbar, ActionButton } from 'react-native-material-ui';
+import { Divider, Button } from 'react-native-elements';
+import { Toolbar } from 'react-native-material-ui';
 import PopupDialog, { SlideAnimation, DialogTitle } from 'react-native-popup-dialog';
 import Colors from '../constants/Colors';
 
@@ -20,12 +22,13 @@ export default class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      haveNotes: false,
+      isExist: false,
     };
   }
 
   componentDidMount() {
     StatusBar.setHidden(true)
+    this._needSignInPopupDialog()
   }
 
   static navigationOptions = {
@@ -55,13 +58,33 @@ export default class HomeScreen extends React.Component {
         <MonoText
           style={{ position: "absolute", top: 10 }}
         >Hello</MonoText>
+
+        <PopupDialog
+          ref={(popupDialog) => { this.popupDialog = popupDialog; }}
+          dialogAnimation={slideAnimation}>
+          <View style={styles.popupContainer}>
+            <Button
+              raised
+              icon={{name: 'google-play', type: 'entypo', buttonStyle: {color: 'red'}}
+              title='Sign In Via Google' />
+            <Divider style={styles.separator} />
+            <TextInput
+              style={styles.textInputStyle}
+              placeholder="Pick a Nickname"
+              clearButtonMode="while-editing"
+            // onChangeText={(text) => this.setState({ text })}
+            // value={this.state.text}
+            />
+          </View>
+        </PopupDialog>
       </KeyboardAvoidingView >
     );
   }
 
-  createContent = () => {
-    console.log("create")
-    this.popupDialog.show();
+  _needSignInPopupDialog = () => {
+    if (!this.state.isExist) {
+      this.popupDialog.show();
+    }
   };
 
   _handleLearnMorePress = () => {
@@ -84,10 +107,27 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#F9FBE7',
   },
-  contentContainer: {
+  separator: {
+    borderBottomColor: '#bbb',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+  textInputStyle: {
+    height: 40,
+    width: 160,
+    marginTop: 100,
+    alignItems: 'center',
+    borderColor: 'gray',
+    borderWidth: 0,
+    borderBottomWidth: 1,
   },
   mapContainer: {
     flex: 1,
+  },
+  popupContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   getStartedContainer: {
     alignItems: 'center',
