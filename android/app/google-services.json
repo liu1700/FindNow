@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "756154264723",
+    "firebase_url": "https://findnow-212214.firebaseio.com",
+    "project_id": "findnow-212214",
+    "storage_bucket": "findnow-212214.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:756154264723:android:46c158fdd2b4eb8c",
+        "android_client_info": {
+          "package_name": "com.findnow"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "756154264723-pgfe2gu9vmkfkpfh671mm90b7h6kep9u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.findnow",
+            "certificate_hash": "9694a6186c895bb5acf0a797fa8cddb85888a204"
+          }
+        },
+        {
+          "client_id": "756154264723-qoidsh56k7q7bhsmp0cl5ljfgvhk0p1q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHbx-3EKeNcdQCrI6XFWp_6lhCgztXra4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "756154264723-qoidsh56k7q7bhsmp0cl5ljfgvhk0p1q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
