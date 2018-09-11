@@ -9,7 +9,6 @@ import {
   Text,
   TextInput,
 } from 'react-native';
-import MapView from 'react-native-maps';
 
 import { MonoText, TabBarTitleText } from '../components/StyledText';
 import { Toolbar } from 'react-native-material-ui';
@@ -48,13 +47,6 @@ export default class HomeScreen extends React.Component {
   render() {
     return (
       <KeyboardAvoidingView style={styles.container}>
-        <MapView style={styles.mapContainer}
-          initialRegion={{
-            latitude: 37.78825,
-            longitude: -122.4324,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
-          }} ></MapView>
 
         <MonoText
           style={{ position: "absolute", top: 10 }}
