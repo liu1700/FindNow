@@ -15,8 +15,6 @@ import { MonoText, TabBarTitleText } from '../components/StyledText';
 import { Toolbar } from 'react-native-material-ui';
 import PopupDialog, { SlideAnimation, DialogTitle } from 'react-native-popup-dialog';
 import Colors from '../constants/Colors';
-import DeviceInfo from 'react-native-device-info';
-import { GoogleSignin, GoogleSigninButton } from 'react-native-google-signin';
 
 export default class HomeScreen extends React.Component {
 
@@ -60,13 +58,6 @@ export default class HomeScreen extends React.Component {
         <MonoText
           style={{ position: "absolute", top: 10 }}
         >Hello</MonoText>
-
-        <GoogleSigninButton
-          style={{ width: 48, height: 48 }}
-          size={GoogleSigninButton.Size.Icon}
-          color={GoogleSigninButton.Color.Dark}
-          onPress={this._signIn}
-          disabled={this.state.isSigninInProgress} />
 
         <PopupDialog
           ref={(popupDialog) => { this.popupDialog = popupDialog; }}
