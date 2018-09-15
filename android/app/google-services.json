@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "756154264723-pgfe2gu9vmkfkpfh671mm90b7h6kep9u.apps.googleusercontent.com",
+          "client_id": "756154264723-4vtp564ov175e33v4bqqr6q4510fm6ds.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.findnow",
-            "certificate_hash": "9694a6186c895bb5acf0a797fa8cddb85888a204"
+            "certificate_hash": "3d7bd51d6e3043c9fd4661b3f29a8a70598a7d2b"
           }
         },
         {

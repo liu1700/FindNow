@@ -27,7 +27,6 @@ export default class HomeScreen extends React.Component {
 
   componentDidMount() {
     StatusBar.setHidden(true)
-    console.log(DeviceInfo.getUniqueID())
     // this._needSignInPopupDialog()
   }
 
