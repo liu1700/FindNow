@@ -8,12 +8,14 @@ import {
   SectionList,
   Text,
   TextInput,
+  Modal,
+  Alert,
+  TouchableHighlight,
 } from 'react-native';
 import MapView from 'react-native-maps';
 
 import { MonoText, TabBarTitleText } from '../components/StyledText';
 import { Toolbar } from 'react-native-material-ui';
-import PopupDialog, { SlideAnimation, DialogTitle } from 'react-native-popup-dialog';
 import Colors from '../constants/Colors';
 
 export default class HomeScreen extends React.Component {
@@ -21,17 +23,25 @@ export default class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isExist: false,
+      isVisible: false,
     };
   }
 
   componentDidMount() {
     StatusBar.setHidden(true)
-    // this._needSignInPopupDialog()
+    // this._groupPopupDialog()
   }
 
-  static navigationOptions = {
-    header: () => <Toolbar
+  setModalVisible = (visible) => {
+    this.setState({ isVisible: visible });
+  }
+
+  componentWillMount() {
+    this.props.navigation.setParams({setModalVisible: this.setModalVisible});
+  }
+
+  static navigationOptions = ({ navigation }) => ({
+    header: (<Toolbar
       style={{
         container: { backgroundColor: Colors.headerColor }
       }}
@@ -40,8 +50,9 @@ export default class HomeScreen extends React.Component {
         placeholder: 'Search',
       }}
       leftElement="group-add"
-    />,
-  };
+      onLeftElementPress={() => {navigation.state.params.setModalVisible(true)}}
+    />)
+  })
 
   render() {
     return (
@@ -54,32 +65,29 @@ export default class HomeScreen extends React.Component {
             longitudeDelta: 0.0421,
           }} ></MapView>
 
-        <MonoText
-          style={{ position: "absolute", top: 10 }}
-        >Hello</MonoText>
+        <Modal
+          animationType="slide"
+          transparent={false}
+          visible={this.state.isVisible}
+          onRequestClose={() => {
+            Alert.alert('Modal has been closed.');
+          }}>
+          <View style={{ marginTop: 22 }}>
+            <View>
+              <Text>Hello World!</Text>
 
-        <PopupDialog
-          ref={(popupDialog) => { this.popupDialog = popupDialog; }}
-          dialogAnimation={slideAnimation}>
-          <View style={styles.popupContainer}>
-            <TextInput
-              style={styles.textInputStyle}
-              placeholder="Pick a Nickname"
-              clearButtonMode="while-editing"
-            // onChangeText={(text) => this.setState({ text })}
-            // value={this.state.text}
-            />
+              <TouchableHighlight
+                onPress={() => {
+                  this.setModalVisible(!this.state.isVisible);
+                }}>
+                <Text>Hide Modal</Text>
+              </TouchableHighlight>
+            </View>
           </View>
-        </PopupDialog>
+        </Modal>
       </KeyboardAvoidingView >
     );
   }
-
-  _needSignInPopupDialog = () => {
-    if (!this.state.isExist) {
-      this.popupDialog.show();
-    }
-  };
 
   _handleLearnMorePress = () => {
     // WebBrowser.openBrowserAsync('https://docs.expo.io/versions/latest/guides/development-mode');
@@ -91,10 +99,6 @@ export default class HomeScreen extends React.Component {
     // );
   };
 }
-
-const slideAnimation = new SlideAnimation({
-  slideFrom: 'bottom',
-});
 
 const styles = StyleSheet.create({
   container: {
