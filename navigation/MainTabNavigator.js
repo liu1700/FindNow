@@ -1,22 +1,23 @@
 import React from 'react';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+// import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation';
 
-import TabBarIcon from '../components/TabBarIcon';
+// import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+// import SettingsScreen from '../screens/SettingsScreen';
 
-const HomeStack = createStackNavigator({
-  Home: HomeScreen,
+export default createStackNavigator({
+  HomeScreen,
 });
 
-HomeStack.navigationOptions = {
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={'location'}
-    />
-  ),
-};
+// HomeStack.navigationOptions = {
+//   tabBarIcon: ({ focused }) => (
+//     <TabBarIcon
+//       focused={focused}
+//       name={'location'}
+//     />
+//   ),
+// };
 
 // const ShareStack = createStackNavigator({
 //   Share: ShareScreen,
@@ -34,31 +35,31 @@ HomeStack.navigationOptions = {
 //   ),
 // };
 
-const SettingsStack = createStackNavigator({
-  Settings: SettingsScreen,
-});
+// const SettingsStack = createStackNavigator({
+//   Settings: SettingsScreen,
+// });
 
-SettingsStack.navigationOptions = {
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={'menu'}
-    />
-  ),
-};
+// SettingsStack.navigationOptions = {
+//   tabBarIcon: ({ focused }) => (
+//     <TabBarIcon
+//       focused={focused}
+//       name={'menu'}
+//     />
+//   ),
+// };
 
-export default createBottomTabNavigator(
-  {
-    HomeStack,
-    // ShareStack,
-    SettingsStack,
-  },
-  {
-    tabBarOptions: {
-      showLabel: false,
-      style: {
-        backgroundColor: '#F9FBE7',
-      },
-    },
-  }
-);
+// export default createBottomTabNavigator(
+//   {
+//     HomeStack,
+//     // ShareStack,
+//     // SettingsStack,
+//   },
+//   {
+//     tabBarOptions: {
+//       showLabel: false,
+//       style: {
+//         backgroundColor: '#F9FBE7',
+//       },
+//     },
+//   }
+// );

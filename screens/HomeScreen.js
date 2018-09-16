@@ -10,12 +10,12 @@ import {
   TextInput,
   Modal,
   Alert,
-  TouchableHighlight,
 } from 'react-native';
 import MapView from 'react-native-maps';
 
 import { MonoText, TabBarTitleText } from '../components/StyledText';
-import { Toolbar } from 'react-native-material-ui';
+import InputBar from '../components/InputBar';
+import { Toolbar, Button } from 'react-native-material-ui';
 import Colors from '../constants/Colors';
 
 export default class HomeScreen extends React.Component {
@@ -25,6 +25,30 @@ export default class HomeScreen extends React.Component {
     this.state = {
       isVisible: false,
     };
+
+    this.menuFunctions = [
+      { name: "Setting", cb: this.toSetting },
+      { name: "Privacy Policy", cb: this.showPrivacyPolicy }
+    ]
+
+    this.optionsList = this.menuFunctions.map(v => { v.name })
+
+    this.props.navigation.setParams(
+      {
+        setModalVisible: this.setModalVisible,
+        options: this.menuFunctions,
+        optionList: this.optionsList,
+      }
+    );
+  }
+
+  toSetting = () => {
+    const { navigate } = this.props.navigation;
+    navigate('Setting')
+  }
+
+  showPrivacyPolicy = () => {
+    console.log("show policy")
   }
 
   componentDidMount() {
@@ -36,28 +60,38 @@ export default class HomeScreen extends React.Component {
     this.setState({ isVisible: visible });
   }
 
-  componentWillMount() {
-    this.props.navigation.setParams({setModalVisible: this.setModalVisible});
-  }
-
-  static navigationOptions = ({ navigation }) => ({
-    header: (<Toolbar
-      style={{
-        container: { backgroundColor: Colors.headerColor }
-      }}
-      searchable={{
-        autoFocus: true,
-        placeholder: 'Search',
-      }}
-      leftElement="group-add"
-      onLeftElementPress={() => {navigation.state.params.setModalVisible(true)}}
-    />)
-  })
+  static navigationOptions = ({ navigation }) => (
+    {
+      header: (<Toolbar
+        style={{
+          container: { backgroundColor: Colors.headerColor }
+        }}
+        rightElement={{
+          menu: {
+            icon: "menu",
+            labels: ["Setting", "Privacy Policy"],
+          }
+        }}
+        onRightElementPress={(label) => {
+          if (label.result === "itemSelected") {
+            let option = navigation.state.params.options[label.index];
+            if (option !== null) {
+              option.cb()
+            }
+          }
+        }}
+        leftElement="group-add"
+        onLeftElementPress={() => { navigation.state.params.setModalVisible(true) }}
+      />)
+    }
+  )
 
   render() {
     return (
       <KeyboardAvoidingView style={styles.container}>
         <MapView style={styles.mapContainer}
+          showsUserLocation={true}
+          loadingEnabled={true}
           initialRegion={{
             latitude: 37.78825,
             longitude: -122.4324,
@@ -65,39 +99,45 @@ export default class HomeScreen extends React.Component {
             longitudeDelta: 0.0421,
           }} ></MapView>
 
+        <InputBar />
+
         <Modal
           animationType="slide"
           transparent={false}
+          presentationStyle="pageSheet"
           visible={this.state.isVisible}
           onRequestClose={() => {
             Alert.alert('Modal has been closed.');
           }}>
           <View style={{ marginTop: 22 }}>
             <View>
-              <Text>Hello World!</Text>
-
-              <TouchableHighlight
+              <Button
+                raised
+                primary
+                text="Create group"
+                onPress={() => {
+                  console.log("create");
+                }} />
+              <Button
+                raised
+                primary
+                text="Join group"
+                onPress={() => {
+                  console.log("join");
+                }} />
+              <Button
+                raised
+                primary
+                text="Back"
                 onPress={() => {
                   this.setModalVisible(!this.state.isVisible);
-                }}>
-                <Text>Hide Modal</Text>
-              </TouchableHighlight>
+                }} />
             </View>
           </View>
         </Modal>
       </KeyboardAvoidingView >
     );
   }
-
-  _handleLearnMorePress = () => {
-    // WebBrowser.openBrowserAsync('https://docs.expo.io/versions/latest/guides/development-mode');
-  };
-
-  _handleHelpPress = () => {
-    // WebBrowser.openBrowserAsync(
-    //   'https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes'
-    // );
-  };
 }
 
 const styles = StyleSheet.create({
