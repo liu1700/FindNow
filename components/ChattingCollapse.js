@@ -1,23 +1,14 @@
 import React from 'react';
 import { View, StyleSheet, TextInput } from 'react-native';
-import { Button } from 'react-native-material-ui';
+import { Button, Badge } from 'react-native-material-ui';
+import Collapsible from 'react-native-collapsible';
 
 export default class ChattingCollapse extends React.Component {
-
-    viewing = () => {
-        console.log(this.state.message);
-    }
 
     render() {
         return (
             <View style={styles.container}>
-                <TextInput
-                    style={styles.input}
-                    onChangeText={text => this.setState({ message: text })}
-                    placeholderTextColor='white'
-                    underlineColorAndroid='transparent'
-                />
-                <Button style={{container:styles.confirm}} onPress={() => this.send()} text='SEND' />
+                <Badge text="3"></Badge>
             </View>
         );
     }
