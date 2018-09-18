@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, StyleSheet, TextInput } from 'react-native';
-import { Button, Badge } from 'react-native-material-ui';
+import { View, StyleSheet, Text } from 'react-native';
+import { Badge, Button } from 'react-native-elements';
 import Collapsible from 'react-native-collapsible';
 
 export default class ChattingCollapse extends React.Component {
@@ -8,7 +8,14 @@ export default class ChattingCollapse extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Badge text="3"></Badge>
+                <Badge style={styles.badge}>
+                    <Text>99</Text>
+                </Badge>
+                <Button style={styles.chatButton}
+                    title={null}
+                    rounded={true}
+                    icon={{ name: 'chat', type: 'entypo' }} >
+                </Button>
             </View>
         );
     }
@@ -16,11 +23,8 @@ export default class ChattingCollapse extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        position: 'relative',
-        bottom: 0,
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
-        height: 40,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     input: {
         backgroundColor: 'red',
@@ -29,5 +33,10 @@ const styles = StyleSheet.create({
     },
     confirm: {
         width: '20%',
-    }
+    },
+    badge: {
+        position: 'absolute',
+    },
+    chatButton: {
+    },
 });

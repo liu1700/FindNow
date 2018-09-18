@@ -13,8 +13,8 @@ import {
 } from 'react-native';
 import MapView from 'react-native-maps';
 
-import { MonoText, TabBarTitleText } from '../components/StyledText';
 import InputBar from '../components/InputBar';
+import ChattingCollapse from '../components/ChattingCollapse';
 import { Toolbar, Button } from 'react-native-material-ui';
 import Colors from '../constants/Colors';
 
@@ -98,6 +98,8 @@ export default class HomeScreen extends React.Component {
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421,
           }} ></MapView>
+
+        <ChattingCollapse />
 
         <InputBar />
 
