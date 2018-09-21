@@ -138,10 +138,10 @@ export default class HomeScreen extends React.Component {
           }}
         /> */}
 
-        <InputBar
+        {/* <InputBar
           value={this.state.message}
           onPress={() => this.send()}
-          onChangeText={text => this.setState({ message: text })} />
+          onChangeText={text => this.setState({ message: text })} /> */}
 
         <Modal
           animationType="slide"
