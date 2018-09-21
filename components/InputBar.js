@@ -4,20 +4,29 @@ import { Button } from 'react-native-material-ui';
 
 export default class InputBar extends React.Component {
 
-    send = () => {
-        console.log(this.state.message);
+    constructor(props) {
+        super(props);
+        this.state = {
+            height: 0
+        };
     }
 
     render() {
         return (
             <View style={styles.container}>
                 <TextInput
+                    {...this.props}
+                    multiline={true}
                     style={styles.input}
-                    onChangeText={text => this.setState({ message: text })}
+                    onContentSizeChange={(event) => {
+                        this.setState({ height: event.nativeEvent.contentSize.height })
+                    }}
                     placeholderTextColor='white'
                     underlineColorAndroid='transparent'
                 />
-                <Button style={{container:styles.confirm}} onPress={() => this.send()} text='SEND' />
+                <Button
+                    {...this.props}
+                    style={{ container: styles.confirm }} text='SEND' />
             </View>
         );
     }

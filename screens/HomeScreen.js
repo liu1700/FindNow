@@ -17,6 +17,8 @@ import InputBar from '../components/InputBar';
 import ChattingCollapse from '../components/ChattingCollapse';
 import { Toolbar, Button } from 'react-native-material-ui';
 import Colors from '../constants/Colors';
+import { GiftedChat } from 'react-native-gifted-chat';
+import ChatView from '../components/ChatView/ChatView';
 
 export default class HomeScreen extends React.Component {
 
@@ -24,6 +26,8 @@ export default class HomeScreen extends React.Component {
     super(props);
     this.state = {
       isVisible: false,
+      message: '',
+      messages: [],
     };
 
     this.menuFunctions = [
@@ -86,6 +90,32 @@ export default class HomeScreen extends React.Component {
     }
   )
 
+  onSend(messages = []) {
+    console.log(messages)
+    this.setState((previousState) => {
+      return {
+        messages: GiftedChat.append(previousState.messages, messages),
+      };
+    });
+  }
+
+  send() {
+    this.setState((previousState) => {
+      return {
+        messages: GiftedChat.append(previousState.messages, {
+          _id: 1,
+          text: this.state.message,
+          createdAt: new Date(),
+          user: {
+            _id: 2,
+            name: 'React Native',
+            avatar: 'https://placeimg.com/140/140/any',
+          }
+        }),
+      };
+    });
+  }
+
   render() {
     return (
       <KeyboardAvoidingView style={styles.container}>
@@ -99,9 +129,19 @@ export default class HomeScreen extends React.Component {
             longitudeDelta: 0.0421,
           }} ></MapView>
 
-        <ChattingCollapse />
+        <ChatView />
+        {/* <ChattingCollapse
+          messages={this.state.messages}
+          onSend={this.onSend}
+          user={{
+            _id: 1,
+          }}
+        /> */}
 
-        <InputBar />
+        <InputBar
+          value={this.state.message}
+          onPress={() => this.send()}
+          onChangeText={text => this.setState({ message: text })} />
 
         <Modal
           animationType="slide"

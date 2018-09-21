@@ -7,11 +7,13 @@
     "test": "jest"
   },
   "dependencies": {
+    "emoji-utils": "^1.0.1",
     "react": "16.4.1",
     "react-native": "0.56.0",
     "react-native-collapsible": "^0.13.0",
     "react-native-device-info": "^0.22.5",
     "react-native-elements": "^1.0.0-beta5",
+    "react-native-gifted-chat": "^0.4.3",
     "react-native-google-signin": "^1.0.0-rc5",
     "react-native-maps": "^0.21.0",
     "react-native-material-ui": "^1.30.1",
