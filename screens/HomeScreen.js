@@ -13,11 +13,8 @@ import {
 } from 'react-native';
 import MapView from 'react-native-maps';
 
-import InputBar from '../components/InputBar';
-import ChattingCollapse from '../components/ChattingCollapse';
 import { Toolbar, Button } from 'react-native-material-ui';
 import Colors from '../constants/Colors';
-import { GiftedChat } from 'react-native-gifted-chat';
 import ChatView from '../components/ChatView/ChatView';
 
 export default class HomeScreen extends React.Component {
@@ -90,30 +87,7 @@ export default class HomeScreen extends React.Component {
     }
   )
 
-  onSend(messages = []) {
-    console.log(messages)
-    this.setState((previousState) => {
-      return {
-        messages: GiftedChat.append(previousState.messages, messages),
-      };
-    });
-  }
-
   send() {
-    this.setState((previousState) => {
-      return {
-        messages: GiftedChat.append(previousState.messages, {
-          _id: 1,
-          text: this.state.message,
-          createdAt: new Date(),
-          user: {
-            _id: 2,
-            name: 'React Native',
-            avatar: 'https://placeimg.com/140/140/any',
-          }
-        }),
-      };
-    });
   }
 
   render() {
@@ -129,14 +103,7 @@ export default class HomeScreen extends React.Component {
             longitudeDelta: 0.0421,
           }} ></MapView>
 
-        <ChatView />
-        {/* <ChattingCollapse
-          messages={this.state.messages}
-          onSend={this.onSend}
-          user={{
-            _id: 1,
-          }}
-        /> */}
+        <ChatView style={styles.chatContainer} />
 
         {/* <InputBar
           value={this.state.message}
@@ -201,6 +168,9 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   mapContainer: {
+    flex: 3,
+  },
+  chatContainer: {
     flex: 1,
   },
   popupContainer: {
