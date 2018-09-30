@@ -9,6 +9,7 @@ import {
 
 import DeviceInfo from 'react-native-device-info';
 import { GoogleSignin, GoogleSigninButton, statusCodes } from 'react-native-google-signin';
+import url, { BuildPost } from '../networking/Http';
 
 export default class OnboardingScreen extends React.Component {
 
@@ -33,6 +34,8 @@ export default class OnboardingScreen extends React.Component {
         const { userInfo } = this.state;
         const { navigate } = this.props.navigation;
         if (userInfo != null) {
+            console.log(userInfo.user);
+            this._postLogin(userInfo.user);
             navigate('Main', userInfo);
         }
     }
@@ -42,6 +45,33 @@ export default class OnboardingScreen extends React.Component {
             webClientId: '756154264723-qoidsh56k7q7bhsmp0cl5ljfgvhk0p1q.apps.googleusercontent.com',
             offlineAccess: false,
         });
+    }
+
+    async _postLogin(userInfo) {
+        try {
+            console.log(url.LoginURL)
+            console.log(BuildPost({
+                'userID': userInfo.id,
+                'fullName': userInfo.name,
+                'imgUrl': userInfo.photo,
+                'email': userInfo.email,
+            }))
+
+            let response = await fetch(
+                url.LoginURL, BuildPost({
+                    'userID': userInfo.id,
+                    'fullName': userInfo.name,
+                    'imgUrl': userInfo.photo,
+                    'email': userInfo.email,
+                })
+            );
+
+            let responseJson = await response.json();
+            console.log(responseJson)
+            return responseJson.body;
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     async _getCurrentUser() {
