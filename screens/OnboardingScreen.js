@@ -34,8 +34,8 @@ export default class OnboardingScreen extends React.Component {
         const { userInfo } = this.state;
         const { navigate } = this.props.navigation;
         if (userInfo != null) {
-            console.log(userInfo.user);
-            this._postLogin(userInfo.user);
+            console.log(userInfo);
+            this._postLogin(userInfo);
             navigate('Main', userInfo);
         }
     }
@@ -47,11 +47,13 @@ export default class OnboardingScreen extends React.Component {
         });
     }
 
-    async _postLogin(userInfo) {
+    async _postLogin(u) {
         try {
+            let userInfo = u.user
             console.log(url.LoginURL)
             console.log(BuildPost({
-                'userID': userInfo.id,
+                'idToken': u.idToken,
+                'googleID': userInfo.id,
                 'fullName': userInfo.name,
                 'imgUrl': userInfo.photo,
                 'email': userInfo.email,
@@ -63,6 +65,7 @@ export default class OnboardingScreen extends React.Component {
                     'fullName': userInfo.name,
                     'imgUrl': userInfo.photo,
                     'email': userInfo.email,
+                    'idToken': u.idToken,
                 })
             );
 
