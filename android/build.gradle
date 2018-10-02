@@ -38,4 +38,6 @@ ext {
     compileSdkVersion = 26
     targetSdkVersion = 26
     supportLibVersion = "26.1.0"
+    gradle3EXPERIMENTAL = "yes"
+    googlePlayServicesVersion = "15.0.0"
 }

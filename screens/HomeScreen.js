@@ -16,6 +16,7 @@ import MapView from 'react-native-maps';
 import { Toolbar, Button } from 'react-native-material-ui';
 import Colors from '../constants/Colors';
 import ChatView from '../components/ChatView/ChatView';
+import { StartBgTracking, StopBgTracking } from '../components/BgLocationTracking';
 
 export default class HomeScreen extends React.Component {
 
@@ -58,17 +59,11 @@ export default class HomeScreen extends React.Component {
   componentDidMount() {
     StatusBar.setHidden(true)
     // this._groupPopupDialog()
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        this.setState({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-          error: null,
-        });
-      },
-      (error) => this.setState({ error: error.message }),
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
-    );
+    StartBgTracking()
+  }
+
+  componentWillUnmount() {
+    StopBgTracking()
   }
 
   setModalVisible = (visible) => {
