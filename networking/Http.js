@@ -1,5 +1,5 @@
 
-const baseURL = 'http://192.168.0.108:8087'
+const baseURL = 'http://192.168.0.102:8087'
 const apiVersion = '/v1'
 const requestURL = baseURL + apiVersion
 

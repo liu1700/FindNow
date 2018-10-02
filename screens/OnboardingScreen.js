@@ -53,7 +53,6 @@ export default class OnboardingScreen extends React.Component {
             console.log(url.LoginURL)
             console.log(BuildPost({
                 'idToken': u.idToken,
-                'googleID': userInfo.id,
                 'fullName': userInfo.name,
                 'imgUrl': userInfo.photo,
                 'email': userInfo.email,
@@ -61,7 +60,6 @@ export default class OnboardingScreen extends React.Component {
 
             let response = await fetch(
                 url.LoginURL, BuildPost({
-                    'userID': userInfo.id,
                     'fullName': userInfo.name,
                     'imgUrl': userInfo.photo,
                     'email': userInfo.email,
