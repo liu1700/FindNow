@@ -25,6 +25,9 @@ export default class HomeScreen extends React.Component {
       isVisible: false,
       message: '',
       messages: [],
+      latitude: 0,
+      longitude: 0,
+      error: null,
     };
 
     this.menuFunctions = [
@@ -55,6 +58,17 @@ export default class HomeScreen extends React.Component {
   componentDidMount() {
     StatusBar.setHidden(true)
     // this._groupPopupDialog()
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        this.setState({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          error: null,
+        });
+      },
+      (error) => this.setState({ error: error.message }),
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
+    );
   }
 
   setModalVisible = (visible) => {
@@ -96,9 +110,15 @@ export default class HomeScreen extends React.Component {
         <MapView style={styles.mapContainer}
           showsUserLocation={true}
           loadingEnabled={true}
+          region={{
+            latitude: this.state.latitude,
+            longitude: this.state.longitude,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
           initialRegion={{
-            latitude: 37.78825,
-            longitude: -122.4324,
+            latitude: this.state.latitude,
+            longitude: this.state.longitude,
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421,
           }} ></MapView>

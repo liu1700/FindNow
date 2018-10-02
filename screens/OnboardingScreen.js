@@ -50,14 +50,6 @@ export default class OnboardingScreen extends React.Component {
     async _postLogin(u) {
         try {
             let userInfo = u.user
-            console.log(url.LoginURL)
-            console.log(BuildPost({
-                'idToken': u.idToken,
-                'fullName': userInfo.name,
-                'imgUrl': userInfo.photo,
-                'email': userInfo.email,
-            }))
-
             let response = await fetch(
                 url.LoginURL, BuildPost({
                     'fullName': userInfo.name,
