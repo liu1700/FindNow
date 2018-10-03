@@ -10,6 +10,7 @@ import {
 import DeviceInfo from 'react-native-device-info';
 import { GoogleSignin, GoogleSigninButton, statusCodes } from 'react-native-google-signin';
 import url, { BuildPost } from '../networking/Http';
+import UserDatas from '../globalStorage/variables';
 
 export default class OnboardingScreen extends React.Component {
 
@@ -35,8 +36,10 @@ export default class OnboardingScreen extends React.Component {
         const { navigate } = this.props.navigation;
         if (userInfo != null) {
             console.log(userInfo);
-            this._postLogin(userInfo);
-            navigate('Main', userInfo);
+            let resp = this._postLogin(userInfo);
+            userInfo.uid = resp.uid
+            UserDatas.setMyUserData(userInfo)
+            navigate('Main');
         }
     }
 

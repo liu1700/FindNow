@@ -1,8 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Alert } from 'react-native';
 import BackgroundGeolocation from 'react-native-mauron85-background-geolocation';
+import { RequestHeader, UploadLocationURL } from '../networking/Http';
 
-export function StartBgTracking() {
+export function UpdateMyCurrentLocation(successFn, errorFn) {
+    BackgroundGeolocation.getCurrentLocation(successFn, errorFn)
+}
+
+export function StartBgTracking(userID) {
     BackgroundGeolocation.configure({
         desiredAccuracy: BackgroundGeolocation.HIGH_ACCURACY,
         stationaryRadius: 50,
@@ -11,21 +16,21 @@ export function StartBgTracking() {
         notificationText: 'enabled',
         debug: true,
         startOnBoot: false,
-        stopOnTerminate: false,
+        stopOnTerminate: true,
         locationProvider: BackgroundGeolocation.ACTIVITY_PROVIDER,
         interval: 10000,
         fastestInterval: 5000,
         activitiesInterval: 10000,
         stopOnStillActivity: false,
-        url: 'http://192.168.81.15:3000/location',
+        url: UploadLocationURL,
         httpHeaders: {
-            'X-FOO': 'bar'
+            'X-FINDNOW-NAME-ID': RequestHeader,
         },
         // customize post properties
         postTemplate: {
             lat: '@latitude',
             lon: '@longitude',
-            foo: 'bar' // you can also add your own properties
+            uid: userID
         }
     });
 
@@ -43,7 +48,7 @@ export function StartBgTracking() {
 
     BackgroundGeolocation.on('stationary', (stationaryLocation) => {
         // handle stationary locations here
-        Actions.sendLocation(stationaryLocation);
+        // Actions.sendLocation(stationaryLocation);
     });
 
     BackgroundGeolocation.on('error', (error) => {

@@ -13,13 +13,15 @@ export function BuildPost(reqBody) {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'FINDNOW-NAME-ID': version + name + content,
+            'X-FINDNOW-NAME-ID': version + name + content,
         },
         body: JSON.stringify(reqBody),
     }
 }
 
 export default {
+    RequestHeader: version + name + content,
     URL: requestURL,
     LoginURL: requestURL + '/login',
+    UploadLocationURL: requestURL + '/location',
 }
