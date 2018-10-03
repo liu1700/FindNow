@@ -1,7 +1,8 @@
 import React from 'react';
 import { Alert } from 'react-native';
 import BackgroundGeolocation from 'react-native-mauron85-background-geolocation';
-import { RequestHeader, UploadLocationURL } from '../networking/Http';
+import url, { BuildPost } from '../networking/Http';
+
 
 export function UpdateMyCurrentLocation(successFn, errorFn) {
     BackgroundGeolocation.getCurrentLocation(successFn, errorFn)
@@ -22,9 +23,11 @@ export function StartBgTracking(userID) {
         fastestInterval: 5000,
         activitiesInterval: 10000,
         stopOnStillActivity: false,
-        url: UploadLocationURL,
+        url: url.UploadLocationURL,
         httpHeaders: {
-            'X-FINDNOW-NAME-ID': RequestHeader,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'X-FINDNOW-NAME-ID': url.RequestHeader,
         },
         // customize post properties
         postTemplate: {
