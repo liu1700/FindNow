@@ -35,8 +35,8 @@ export default class OnboardingScreen extends React.Component {
         const { userInfo } = this.state;
         const { navigate } = this.props.navigation;
         if (userInfo != null) {
-            console.log(userInfo);
             let resp = this._postLogin(userInfo);
+            console.log(resp);
             userInfo.uid = resp.uid
             UserDatas.setMyUserData(userInfo)
             navigate('Main');

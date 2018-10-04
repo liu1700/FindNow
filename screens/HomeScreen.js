@@ -20,7 +20,7 @@ import { StartBgTracking, StopBgTracking, UpdateMyCurrentLocation } from '../com
 import UserDatas from '../globalStorage/variables';
 
 export default class HomeScreen extends React.Component {
-  
+
   constructor(props) {
     super(props);
     this.state = {
@@ -59,6 +59,7 @@ export default class HomeScreen extends React.Component {
 
   componentDidMount() {
     StatusBar.setHidden(true)
+    console.log(UserDatas.getMe())
     StartBgTracking(UserDatas.getMe().uid)
     UpdateMyCurrentLocation(
       (location) => {

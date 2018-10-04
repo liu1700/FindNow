@@ -2,13 +2,33 @@ import React from 'react';
 import { Alert } from 'react-native';
 import BackgroundGeolocation from 'react-native-mauron85-background-geolocation';
 import url, { BuildPost } from '../networking/Http';
-
+import { InitWS, Send } from '../networking/WebSocket';
 
 export function UpdateMyCurrentLocation(successFn, errorFn) {
     BackgroundGeolocation.getCurrentLocation(successFn, errorFn)
 }
 
 export function StartBgTracking(userID) {
+
+    InitWS(
+        userID,
+        () => {
+            console.log(".....opened")
+        },
+        (e) => {
+            // a message was received
+            console.log(e.data);
+        },
+        (e) => {
+            // an error occurred
+            console.log(e.message);
+        },
+        (e) => {
+            // connection closed
+            console.log(e.code, e.reason);
+        },
+    )
+
     BackgroundGeolocation.configure({
         desiredAccuracy: BackgroundGeolocation.HIGH_ACCURACY,
         stationaryRadius: 50,
